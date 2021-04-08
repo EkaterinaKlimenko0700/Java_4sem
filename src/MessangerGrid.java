@@ -1,10 +1,14 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -18,33 +22,34 @@ public class MessangerGrid extends Application{
     @Override
     public void start(Stage stage) {
 
-        TextField first = new TextField("First");
-        Button second = new Button("Button");
-        TextArea sixth = new TextArea("Sixth");
+        TextField textField = new TextField();
+        Button btn = new Button("Button");
+        TextArea textArea = new TextArea();
         Label labelContacts = new Label("Контакты");
-        ListView<String> contacts = new ListView<>();
 
-        /* second.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-           public void handle(ActionEvent actionEvent) {
-                String text = third.getText();
-                third.setText(first.getText());
-                sixth.setText(sixth.getText() + "\n" + text);
-            }
-        });
+        ObservableList<String> langs = FXCollections.observableArrayList("Мама", "Катя Соседка", "Тетя Люда");
+        ListView<String> contacts = new ListView<>(langs);
 
 
+        btn.setOnAction(actionEvent -> {
+            String text = textField.getText();
+            textArea.setText( "\n" + text);
 
-        first.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        second.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    });
+
+        textField.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 
-        first.setMinWidth(150);
-        first.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
+        textField.setMinWidth(150);
 
-        third.setMinWidth(150);
-        third.setBackground(new Background(new BackgroundFill(Color.AZURE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        labelContacts.setMinWidth(100);
+        labelContacts.setMaxWidth(Double.MAX_VALUE);
+        labelContacts.setAlignment(Pos.CENTER);
+        labelContacts.setTextAlignment(TextAlignment.CENTER);
+
+
 
         GridPane root = new GridPane();
 
@@ -52,26 +57,26 @@ public class MessangerGrid extends Application{
         root.getColumnConstraints().add(new ColumnConstraints(100));
         root.getColumnConstraints().add(new ColumnConstraints(100));
 
+        root.getRowConstraints().add(new RowConstraints(20));
+        root.getRowConstraints().add(new RowConstraints(180));
         root.getRowConstraints().add(new RowConstraints(100));
-        root.getRowConstraints().add(new RowConstraints(100));
-        root.getRowConstraints().add(new RowConstraints(100));
-        root.getRowConstraints().add(new RowConstraints(100));
-        root.getRowConstraints().add(new RowConstraints(100));
-
-        root.add(first,0,0,2,1);
-        root.add(second,0,1);
-        root.add(labelContacts,2,0,1,3);
-        root.add(sixth,2,3, 1,2);
+        root.getRowConstraints().add(new RowConstraints(30));
+        root.getRowConstraints().add(new RowConstraints(30));
 
 
-        Scene scene = new Scene(root, 300, 500);
+        root.add(textField,0,2);
+        root.add(contacts,2,1,1,2);
+        root.add(btn,1,2);
+        root.add(labelContacts,2,0);
+        root.add(textArea,0,0, 2,2);
+
+
+        Scene scene = new Scene(root, 300, 300);
         stage.setScene(scene);
 
         stage.setTitle("GridPane in JavaFX");
 
         stage.show();
-    }*/
+    }
 }
-}
-
 
